@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "expo-status-bar": "~1.12.1",
+    "@expo/vector-icons": "^14.0.3",
+    "react-native-paper": "4.9.2"
+  },
+  "scripts": {
+    "start": "expo start"
+  }
+}
