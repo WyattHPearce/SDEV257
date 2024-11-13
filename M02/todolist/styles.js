@@ -48,4 +48,8 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
+  writeTaskWrapper: {},
+  input: {},
+  addWrapper: {},
+  addText: {},
 });

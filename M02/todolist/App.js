@@ -8,7 +8,14 @@
 `;
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
+import {
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+} from "react-native";
 
 import styles from "./styles";
 import Task from "./components/Task";
@@ -26,13 +33,23 @@ export default function App() {
           <Task text={"Task 2"} />
         </SafeAreaView>
       </SafeAreaView>
+
+      {/* Write a task section */}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.writeTaskWrapper}
+      >
+        <TextInput
+          style={styles.input}
+          placeholder={"Write a task"}
+        ></TextInput>
+
+        <TouchableOpacity>
+          <SafeAreaView style={styles.addWrapper}>
+            <Text style={styles.addText}>+</Text>
+          </SafeAreaView>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//   },
-// });
