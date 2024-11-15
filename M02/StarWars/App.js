@@ -11,49 +11,46 @@
       Ensure you can navigate to each screen.  For now, add a text field to each screen displaying the screen name."
 
 `;
-
+// Dependencies
 import * as React from "react";
-import { Text, SafeAreaView, Button, StyleSheet } from "react-native";
+import { Platform, Text, SafeAreaView, Button, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+// External StyleSheet
 import styles from "./styles";
 
+// Screens
+import HomeScreen from "./HomeScreen";
 import PlanetScreen from "./PlanetScreen";
 import FilmScreen from "./FilmScreen";
 import SpaceshipScreen from "./SpaceshipScreen";
 
 const Stack = createStackNavigator();
-const HomeScreen = ({ navigation }) => (
-  <SafeAreaView style={styles.container}>
-    <Text style={styles.title}>Welcome to the Star Wars App</Text>
-    <Button
-      style={styles.button}
-      title="Go to the Planets Page"
-      onPress={() => navigation.navigate("Planets")}
-    />
-    <Button
-      style={styles.button}
-      title="Go to the Films Page"
-      onPress={() => navigation.navigate("Films")}
-    />
-    <Button
-      style={styles.button}
-      title="Go to the Spaceships Page"
-      onPress={() => navigation.navigate("Spaceships")}
-    />
-  </SafeAreaView>
-);
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Planets" component={PlanetScreen} />
-        <Stack.Screen name="Films" component={FilmScreen} />
-        <Stack.Screen name="Spaceships" component={SpaceshipScreen} />
-      </Stack.Navigator>
+      {Platform.OS === "ios" && (
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Planets" component={PlanetScreen} />
+          <Tab.Screen name="Films" component={FilmScreen} />
+          <Tab.Screen name="Spaceships" component={SpaceshipScreen} />
+        </Tab.Navigator>
+      )}
+      {Platform.OS == "android" && (
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen name="Planets" component={PlanetScreen} />
+          <Drawer.Screen name="Films" component={FilmScreen} />
+          <Drawer.Screen name="Spaceships" component={SpaceshipScreen} />
+        </Drawer.Navigator>
+      )}
     </NavigationContainer>
   );
 };
