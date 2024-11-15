@@ -13,7 +13,7 @@
 `;
 // Dependencies
 import * as React from "react";
-import { Platform, Text, SafeAreaView, Button, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";

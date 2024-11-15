@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, SafeAreaView, Button, FlatList, StyleSheet } from "react-native";
+import { Text, SafeAreaView, FlatList } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import styles from "./styles";
