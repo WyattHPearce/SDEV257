@@ -4,24 +4,26 @@ import axios from "axios";
 
 import styles from "./styles";
 
-const PlanetScreen = ({ navigation }) => {
-  const [planets, setPlanets] = useState([]);
+const StarshipScreen = ({ navigation }) => {
+  const [starships, setStarships] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch data from API and put it in the corresponding array
   useEffect(() => {
-    const fetchPlanets = async () => {
+    const fetchStarships = async () => {
       try {
-        const response = await axios.get("https://www.swapi.tech/api/planets/");
+        const response = await axios.get(
+          "https://www.swapi.tech/api/starships/"
+        );
         console.log("API response:", response.data); // Log the API response
-        setPlanets(response.data.results);
+        setStarships(response.data.results);
       } catch (error) {
-        console.log("Error fetching planet data: ", error);
+        console.log("Error fetching starship data: ", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchPlanets();
+    fetchStarships();
   }, []);
 
   // Display activityIndicator while loading is true
@@ -29,7 +31,7 @@ const PlanetScreen = ({ navigation }) => {
     return (
       <SafeAreaView style={styles.container}>
         <ActivityIndicator size="large" color="blue" />
-        <Text>Loading Planets...</Text>
+        <Text>Loading Starships...</Text>
       </SafeAreaView>
     );
   }
@@ -37,10 +39,10 @@ const PlanetScreen = ({ navigation }) => {
   // Displaying the data in a FlatList
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Planets in Star Wars:</Text>
+      <Text style={styles.title}>Starships in Star Wars:</Text>
       <SafeAreaView style={styles.displayArea}>
         <FlatList
-          data={planets}
+          data={starships}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
             <SafeAreaView style={styles.item}>
@@ -54,4 +56,4 @@ const PlanetScreen = ({ navigation }) => {
   );
 };
 
-export default PlanetScreen;
+export default StarshipScreen;
