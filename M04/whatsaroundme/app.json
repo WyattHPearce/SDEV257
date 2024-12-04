@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "geo-location",
-    "slug": "geo-location",
+    "name": "whatsaroundme",
+    "slug": "whatsaroundme",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
