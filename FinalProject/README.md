@@ -43,9 +43,9 @@ Bellow is an outline of the initial instructions and requirements I was provided
     Work individually or in pairs.
     Submit the GitHub repository link by the deadline.
 
-## Full Project Breakdown
+## Initial Planning Breakdown
 
-Next is a textual outline of the applications pages and layout, in addition to a breakdown of how each of the above requirements are fulfilled:
+Next is a full pre-development breakdown of app layouts and flow, and how requirements were to be fulfilled:
 
 **1) Features**
 
@@ -78,6 +78,7 @@ Next is a textual outline of the applications pages and layout, in addition to a
   Results displayed below search fields.
 
 <br>
+Mockup:
 
 ![Visual mockup of the previously mentioned screens](./assets/Mockup.png)
 
