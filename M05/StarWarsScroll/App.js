@@ -3,12 +3,14 @@
   Date: 12/6/2024
   Description:
     The following is my work on the assignment 'Module 05 Assignment 1 - Star Wars Scroll'
-    I made this program based on the previous SportsTeam Lecture lab, by following 
-    along with the instructor. Here were the instructions I followed for this assignment:
+    I made this program based on the previous StarWarsAPI Assignment, and by following material
+    in chapters 23 and 24 of the course textbook. Here were the instructions I followed for this assignment:
 
-      "Using your text as a guide, create three screens.  One for Planets, one for Films, and one for Spaceships.
-      Use bottom tab navigation on iOS and drawer navigation on Android.
-      Ensure you can navigate to each screen.  For now, add a text field to each screen displaying the screen name."
+      "On each screen, place your list of returned items in a ScrollView.
+      Refer to Chapter 24 for details on implementing a ScrollView.
+      Make each item in the list "Swipeable."
+      For now, make the action executed by the swipe simply display a modal dialog with the text of the item.
+      Refer to Chapter 23 for details on Modal Dialogs."
 
 `;
 // Dependencies

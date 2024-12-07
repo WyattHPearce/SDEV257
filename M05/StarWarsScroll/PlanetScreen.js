@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Text, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import axios from "axios";
 
 import styles from "./styles";
@@ -38,17 +43,16 @@ const PlanetScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Planets in Star Wars:</Text>
+
       <SafeAreaView style={styles.displayArea}>
-        <FlatList
-          data={planets}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => (
-            <SafeAreaView style={styles.item}>
+        <ScrollView>
+          {planets.map((item) => (
+            <SafeAreaView key={item.name} style={styles.item}>
               <Text style={styles.itemTitle}>{item.name}</Text>
               <Text style={styles.itemSubtitle}>{item.url}</Text>
             </SafeAreaView>
-          )}
-        />
+          ))}
+        </ScrollView>
       </SafeAreaView>
     </SafeAreaView>
   );

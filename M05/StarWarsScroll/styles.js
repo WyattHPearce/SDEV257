@@ -29,6 +29,7 @@ export default StyleSheet.create({
   },
   displayArea: {
     flex: 1,
+    height: 1,
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "center",
