@@ -6,6 +6,11 @@ export default StyleSheet.create({
     justifyContent: "center-top",
     alignItems: "center",
   },
+  safeContainer: {
+    flex: 1,
+    justifyContent: "center-top",
+    alignItems: "center",
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -50,5 +55,36 @@ export default StyleSheet.create({
   itemSubtitle: {
     padding: 8,
     fonstSize: 10,
+  },
+  swipeBackground: {
+    backgroundColor: "lime",
+    justifyContent: "center",
+    padding: 20,
+  },
+  swipeText: {
+    color: "white",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalInner: {
+    backgroundColor: "azure",
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalText: {
+    fontSize: 16,
+    margin: 5,
+    color: "slategrey",
+    fontWeight: "bold",
+  },
+  modalButton: {
+    margin: 5,
+    color: "slategrey",
   },
 });
