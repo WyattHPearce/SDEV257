@@ -17,12 +17,20 @@ export default StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "flex-start", // Aligns items at the top of the space
     paddingHorizontal: 15,
-    fontSize: 16,
     alignItems: "center", // Centers items horizontally
     textAlign: "center",
   },
-  refreshButton: {
-    paddingVertical: 15,
+  descriptionText: {
+    fontSize: 16,
+  },
+  button: {
+    padding: 15,
+    margin: 30,
+    backgroundColor: "lightblue",
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 16,
   },
   infoItems: {
     backgroundColor: "white",

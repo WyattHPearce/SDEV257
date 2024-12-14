@@ -1,6 +1,6 @@
 // Imports
 import React, { useState, useEffect } from "react";
-import { Text, SafeAreaView, Button } from "react-native";
+import { Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Location from "expo-location";
 // Third party Imports
@@ -96,6 +96,7 @@ function LocationScreen({ navigation }) {
   // Rendering
   return (
     <SafeAreaView style={styles.container}>
+      {/* Page Title and description */}
       <Text style={styles.title}>Solar Tracker App - Your Location</Text>
       <SafeAreaView style={styles.displayArea}>
         <Text style={styles.descriptionText}>
@@ -103,16 +104,15 @@ function LocationScreen({ navigation }) {
           Tap the 'Refresh' button to update the data.
         </Text>
 
+        {/* Location Info Display */}
         <Text style={styles.infoItems}>Address: {address}</Text>
         <Text style={styles.infoItems}>Latitude: {latitude}</Text>
         <Text style={styles.infoItems}>Longitude: {longitude}</Text>
 
         {/* Refresh Button */}
-        <Button
-          style={styles.refreshButton}
-          title="Refresh"
-          onPress={fetchLocationData}
-        />
+        <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
+          <Text style={styles.buttonText}>Refresh</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaView>
   );
