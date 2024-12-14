@@ -11,64 +11,23 @@ export default StyleSheet.create({
     fontStyle: "bold",
     margin: 15,
   },
-  pageContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   displayArea: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column", // Stacks elements vertically
     alignSelf: "stretch",
-    justifyContent: "center",
+    justifyContent: "flex-start", // Aligns items at the top of the space
+    paddingHorizontal: 15,
+    fontSize: 16,
+    alignItems: "center", // Centers items horizontally
     textAlign: "center",
-    paddingLeft: 15,
-    paddingRight: 15,
-    fontSize: 16,
-    alignItems: "center",
   },
-  listItem: {
-    fontSize: 18,
-    marginBottom: 10,
+  refreshButton: {
+    paddingVertical: 15,
   },
-  textInputContainer: {
-    alignSelf: "stretch",
-    marginBottom: 30,
-    alignItems: "center",
-  },
-  textInputLabel: {
-    marginBottom: 4,
-  },
-  textInput: {
-    alignSelf: "stretch",
+  infoItems: {
     backgroundColor: "white",
-    padding: 10,
-    margin: 15,
+    padding: 7,
+    margin: 4,
     borderRadius: 10,
-    height: 35,
-    fontSize: 11,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalInner: {
-    backgroundColor: "azure",
-    padding: 20,
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  modalText: {
-    fontSize: 16,
-    margin: 5,
-    color: "slategrey",
-    fontWeight: "bold",
-  },
-  modalButton: {
-    margin: 5,
-    color: "slategrey",
   },
 });
