@@ -1,3 +1,4 @@
+// Imports
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -10,11 +11,15 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+// Third Party Imports
 import axios from "axios";
+// Local Imports
 import styles from "./styles";
 
-const API_URL = "https://nominatim.openstreetmap.org/reverse";
+const MAP_API_URL = "https://nominatim.openstreetmap.org/reverse"; // OpenStreetMap API URL
+const SUN_API_URL = "https://api.sunrise-sunset.org/json"; // Sunset API URL
 
+// Formats address and takes out data if it doesn't exist
 function formatAddress(address) {
   const {
     house_number,
@@ -42,10 +47,13 @@ function formatAddress(address) {
 }
 
 function LocationScreen({ navigation }) {
-  const [address, setAddress] = useState("Loading...");
-  const [location, setLocation] = useState();
-  const [loading, setLoading] = useState(true);
+  // Program States
+  const [location, setLocation] = useState(); // Current location
+  const [address, setAddress] = useState("Loading..."); // Address of location
+  const [loading, setLoading] = useState(true); // Used to know if program is loading
+  const [solarData, setSolarData] = useState(null); // State for solar data
 
+  // This function sets and updates program states
   async function fetchLocationData() {
     try {
       setLoading(true);
@@ -59,7 +67,8 @@ function LocationScreen({ navigation }) {
       const location = await Location.getCurrentPositionAsync({});
       setLocation(location);
 
-      const response = await axios.get(API_URL, {
+      // Fetch address data
+      const response = await axios.get(MAP_API_URL, {
         params: {
           lat: location.coords.latitude,
           lon: location.coords.longitude,
@@ -74,8 +83,19 @@ function LocationScreen({ navigation }) {
       } else {
         setAddress("Address information not available.");
       }
+
+      // Fetch solar data from the Sunset API
+      const solarResponse = await axios.get(SUN_API_URL, {
+        params: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude,
+        },
+      });
+
+      setSolarData(solarResponse.data.results); // Set solar data in state
     } catch (error) {
       setAddress("Error retrieving address.");
+      setSolarData(null); // Reset solar data in case of error
     } finally {
       setLoading(false);
     }
@@ -86,14 +106,15 @@ function LocationScreen({ navigation }) {
   }, []);
 
   // Location fetch was async so wait for it to return
-  if (!location) {
+  if (!location || !solarData) {
     return (
       <View style={styles.container}>
-        <Text>Loading location...</Text>
+        <Text>Loading data...</Text>
       </View>
     );
   }
 
+  // Rendering
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -128,7 +149,12 @@ function LocationScreen({ navigation }) {
             />
           </MapView>
 
-          {/* Information Display */}
+          {/* Refresh Button */}
+          <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
+            <Text style={styles.buttonText}>Refresh</Text>
+          </TouchableOpacity>
+
+          {/* General Information Display */}
           <Text style={styles.infoItems}>Address: {address}</Text>
           <Text style={styles.infoItems}>
             Latitude: {location.coords.latitude}
@@ -137,10 +163,21 @@ function LocationScreen({ navigation }) {
             Longitude: {location.coords.longitude}
           </Text>
 
-          {/* Refresh Button */}
-          <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
-            <Text style={styles.buttonText}>Refresh</Text>
-          </TouchableOpacity>
+          {/* Display Solar Data if available */}
+          {solarData ? (
+            <>
+              <Text style={styles.infoItems}>Sunrise: {solarData.sunrise}</Text>
+              <Text style={styles.infoItems}>Sunset: {solarData.sunset}</Text>
+              <Text style={styles.infoItems}>
+                Solar Noon: {solarData.solar_noon}
+              </Text>
+              <Text style={styles.infoItems}>
+                Day Length: {solarData.day_length}
+              </Text>
+            </>
+          ) : (
+            <Text style={styles.infoItems}>Solar data not available.</Text>
+          )}
         </SafeAreaView>
       </ScrollView>
     </SafeAreaView>
