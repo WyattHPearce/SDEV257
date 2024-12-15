@@ -1,18 +1,3 @@
-`
-  Name: Wyatt H. Pearce
-  Date: 12/6/2024
-  Description:
-    The following is my work on the assignment 'Module 05 Assignment 1 - Star Wars Scroll'
-    I made this program based on the previous StarWarsAPI Assignment, and by following material
-    in chapters 23 and 24 of the course textbook. Here were the instructions I followed for this assignment:
-
-      "On each screen, place your list of returned items in a ScrollView.
-      Refer to Chapter 24 for details on implementing a ScrollView.
-      Make each item in the list "Swipeable."
-      For now, make the action executed by the swipe simply display a modal dialog with the text of the item.
-      Refer to Chapter 23 for details on Modal Dialogs."
-
-`;
 // Dependencies
 import * as React from "react";
 import { Platform, StyleSheet } from "react-native";
