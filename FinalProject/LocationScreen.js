@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
@@ -95,51 +96,53 @@ function LocationScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Page Title and description */}
-      <Text style={styles.title}>Solar Tracker App - Your Location</Text>
-      <SafeAreaView style={styles.displayArea}>
-        <Text style={styles.descriptionText}>
-          This is the sunrise / sunset information about your current location!
-          Tap the 'Refresh' button to update the data.
-        </Text>
+      <ScrollView>
+        {/* Page Title and description */}
+        <Text style={styles.title}>Solar Tracker App - Your Location</Text>
+        <SafeAreaView style={styles.displayArea}>
+          <Text style={styles.descriptionText}>
+            This is the sunrise / sunset information about your current
+            location! Tap the 'Refresh' button to update the data.
+          </Text>
 
-        {/* Map Display */}
-        <MapView
-          style={styles.mapView}
-          showsUserLocation
-          followUserLocation
-          initialRegion={{
-            latitude: location.coords.latitude, // Access latitude via coords
-            longitude: location.coords.longitude, // Access longitude via coords
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        >
-          <Marker
-            coordinate={{
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
+          {/* Map Display */}
+          <MapView
+            style={styles.mapView}
+            showsUserLocation
+            followUserLocation
+            initialRegion={{
+              latitude: location.coords.latitude, // Access latitude via coords
+              longitude: location.coords.longitude, // Access longitude via coords
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
             }}
-            pinColor={"red"}
-            title="You are here"
-            description={address}
-          />
-        </MapView>
+          >
+            <Marker
+              coordinate={{
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+              }}
+              pinColor={"red"}
+              title="You are here"
+              description={address}
+            />
+          </MapView>
 
-        {/* Information Display */}
-        <Text style={styles.infoItems}>Address: {address}</Text>
-        <Text style={styles.infoItems}>
-          Latitude: {location.coords.latitude}
-        </Text>
-        <Text style={styles.infoItems}>
-          Longitude: {location.coords.longitude}
-        </Text>
+          {/* Information Display */}
+          <Text style={styles.infoItems}>Address: {address}</Text>
+          <Text style={styles.infoItems}>
+            Latitude: {location.coords.latitude}
+          </Text>
+          <Text style={styles.infoItems}>
+            Longitude: {location.coords.longitude}
+          </Text>
 
-        {/* Refresh Button */}
-        <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
-          <Text style={styles.buttonText}>Refresh</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+          {/* Refresh Button */}
+          <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
+            <Text style={styles.buttonText}>Refresh</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
