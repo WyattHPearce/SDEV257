@@ -44,4 +44,21 @@ export default StyleSheet.create({
     height: 350,
     margin: 30,
   },
+  textInputContainer: {
+    alignSelf: "stretch",
+    marginBottom: 30,
+    alignItems: "center",
+  },
+  textInputLabel: {
+    marginBottom: 4,
+  },
+  textInput: {
+    alignSelf: "stretch",
+    backgroundColor: "white",
+    padding: 10,
+    margin: 25,
+    borderRadius: 10,
+    height: 40,
+    fontSize: 18,
+  },
 });

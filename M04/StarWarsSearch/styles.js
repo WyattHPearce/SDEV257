@@ -20,14 +20,6 @@ export default StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  textInputContainer: {
-    alignSelf: "stretch",
-    marginBottom: 30,
-    alignItems: "center",
-  },
-  textInputLabel: {
-    marginBottom: 4,
-  },
   textInput: {
     alignSelf: "stretch",
     backgroundColor: "white",
