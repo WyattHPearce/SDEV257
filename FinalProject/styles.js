@@ -22,6 +22,7 @@ export default StyleSheet.create({
   },
   descriptionText: {
     fontSize: 16,
+    textAlign: "center",
   },
   button: {
     padding: 15,
@@ -37,5 +38,10 @@ export default StyleSheet.create({
     padding: 7,
     margin: 4,
     borderRadius: 10,
+  },
+  mapView: {
+    alignSelf: "stretch",
+    height: 350,
+    margin: 30,
   },
 });

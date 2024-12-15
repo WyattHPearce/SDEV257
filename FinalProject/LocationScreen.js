@@ -1,35 +1,31 @@
-// Imports
 import React, { useState, useEffect } from "react";
-import { Text, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-// Third party Imports
 import axios from "axios";
-// Local Imports
 import styles from "./styles";
 
-// URL of location API
 const API_URL = "https://nominatim.openstreetmap.org/reverse";
 
-// Function to format the address
 function formatAddress(address) {
-  // Extract individual elements
   const {
-    shop,
     house_number,
     road,
     neighborhood,
     suburb,
-    county,
     city,
     state,
-    iso,
     postcode,
     country,
-    countryCode,
   } = address;
 
-  // Format a string from extracted data
   return [
     house_number,
     road,
@@ -45,55 +41,58 @@ function formatAddress(address) {
 }
 
 function LocationScreen({ navigation }) {
-  // Program states
   const [address, setAddress] = useState("Loading...");
-  const [longitude, setLongitude] = useState(null);
-  const [latitude, setLatitude] = useState(null);
+  const [location, setLocation] = useState();
+  const [loading, setLoading] = useState(true);
 
-  // Function to fetch location and address data
   async function fetchLocationData() {
     try {
+      setLoading(true);
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         setAddress("Permission to access location was denied.");
+        setLoading(false);
         return;
       }
 
       const location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
-      setLongitude(longitude);
-      setLatitude(latitude);
+      setLocation(location);
 
       const response = await axios.get(API_URL, {
         params: {
-          lat: latitude,
-          lon: longitude,
+          lat: location.coords.latitude,
+          lon: location.coords.longitude,
           format: "json",
         },
       });
 
-      console.log("Full response data:", response.data);
       const data = response.data;
-
       if (data && data.address) {
         const formattedAddress = formatAddress(data.address);
         setAddress(formattedAddress);
       } else {
-        console.warn("Address information not found in response data.");
         setAddress("Address information not available.");
       }
     } catch (error) {
-      console.error("Error fetching location data: ", error);
       setAddress("Error retrieving address.");
+    } finally {
+      setLoading(false);
     }
   }
 
-  // Fetch location data when the component mounts
   useEffect(() => {
     fetchLocationData();
   }, []);
 
-  // Rendering
+  // Location fetch was async so wait for it to return
+  if (!location) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading location...</Text>
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Page Title and description */}
@@ -104,10 +103,37 @@ function LocationScreen({ navigation }) {
           Tap the 'Refresh' button to update the data.
         </Text>
 
-        {/* Location Info Display */}
+        {/* Map Display */}
+        <MapView
+          style={styles.mapView}
+          showsUserLocation
+          followUserLocation
+          initialRegion={{
+            latitude: location.coords.latitude, // Access latitude via coords
+            longitude: location.coords.longitude, // Access longitude via coords
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            pinColor={"red"}
+            title="You are here"
+            description={address}
+          />
+        </MapView>
+
+        {/* Information Display */}
         <Text style={styles.infoItems}>Address: {address}</Text>
-        <Text style={styles.infoItems}>Latitude: {latitude}</Text>
-        <Text style={styles.infoItems}>Longitude: {longitude}</Text>
+        <Text style={styles.infoItems}>
+          Latitude: {location.coords.latitude}
+        </Text>
+        <Text style={styles.infoItems}>
+          Longitude: {location.coords.longitude}
+        </Text>
 
         {/* Refresh Button */}
         <TouchableOpacity style={styles.button} onPress={fetchLocationData}>
